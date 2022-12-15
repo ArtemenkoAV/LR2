@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DistributerConfig>
+    <ProducersName>Mpei</ProducersName>
+    <TopicName>topic3</TopicName>
+</DistributerConfig>

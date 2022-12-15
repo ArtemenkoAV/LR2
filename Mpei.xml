@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ConsumerLoad>
+<!--    <load>18.78</load>-->
+<!--    <load>18.78</load>-->
+    <load>3.78</load>
+    <load>3.78</load>
+    <load>3.78</load>
+    <load>3.78</load>
+    <load>3.78</load>
+    <load>7.56</load>
+    <load>11.339999999999998</load>
+    <load>18.9</load>
+    <load>18.9</load>
+    <load>18.9</load>
+    <load>18.9</load>
+    <load>13.229999999999999</load>
+    <load>9.45</load>
+    <load>9.45</load>
+    <load>5.669999999999999</load>
+    <load>5.669999999999999</load>
+    <load>5.669999999999999</load>
+    <load>3.78</load>
+    <load>3.78</load>
+    <load>3.78</load>
+    <load>3.78</load>
+    <load>3.78</load>
+    <distributerName>ThirdDistributer</distributerName>
+    <maxPrice>100</maxPrice>
+</ConsumerLoad>

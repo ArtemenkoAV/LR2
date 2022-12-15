@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<agent>
+    <agentName>Battery</agentName>
+    <type>Equipment</type>
+    <address>
+        <service>
+            <name>LTDB</name>
+            <ip>111</ip>
+            <port>2222</port>
+        </service>
+        <service>
+            <name>TSDB</name>
+            <ip>111</ip>
+            <port>2222</port>
+        </service>
+    </address>
+</agent>

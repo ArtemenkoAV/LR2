@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<agent>
+    <agentName>Battery</agentName>
+    <type>Equipment</type>
+    <platformName>25.52.231.32:1099/JADE</platformName>
+    <platformAddress>http://User-PC:7778/acc</platformAddress>
+    <iface>eth1</iface>
+    <platformPort>7778</platformPort>
+    <deltaT>2000</deltaT>
+    <ifaceIP>192.168.1.213</ifaceIP>
+    <ConnectionToServices>
+        <service>
+            <name>LTDB</name>
+            <ip>111</ip>
+            <port>2222</port>
+        </service>
+        <service>
+            <name>TSDB</name>
+            <ip>111</ip>
+            <port>2222</port>
+        </service>
+    </ConnectionToServices>
+    <EquipmentUnderControl>
+        <Equipment>
+            <equipmentType>battery1</equipmentType>
+            <voltage>220</voltage>
+            <capacity>15000</capacity>
+            <maximumDischargeCurrent>1</maximumDischargeCurrent>
+            <power>10</power>
+            <ultimateOutput>15</ultimateOutput>
+        </Equipment>
+        <Equipment>
+            <equipmentType>battery2</equipmentType>
+            <voltage>220</voltage>
+            <capacity>15000</capacity>
+            <maximumDischargeCurrent>1</maximumDischargeCurrent>
+            <power>10</power>
+            <ultimateOutput>15</ultimateOutput>
+        </Equipment>
+    </EquipmentUnderControl>
+</agent>
