@@ -20,7 +20,7 @@ public class ProducerFSM extends FSMBehaviour {
 
         registerFirstState(new SendingPrice(getAgent(), distributersName, neededLoad, producerData, topic), "SENDINGPRICE");
         registerState(new ReceivingPricec(getAgent(), neededLoad, producerData, distributersName, topic), "RECEIVINGPRICE");
-        registerState(new WaitingForDecision(getAgent(),10000, distributersName, producerData, neededLoad), "WAITINGFORDECISION");
+        registerState(new WaitingForDecision(getAgent(),5000, distributersName, producerData, neededLoad), "WAITINGFORDECISION");
         registerLastState(new AfterWin(getAgent(), distributersName, neededLoad, producerData), "AFTERWIN");
         registerLastState(new DontHaveEnergy(),"NOENERGY");
         registerLastState(new DidntSellEnergy(), "AFTERLOST");

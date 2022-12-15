@@ -19,7 +19,7 @@ public class DivisionContract extends OneShotBehaviour {
 
     @Override
     public void action() {
-        ACLMessage msg = new ACLMessage(ACLMessage.PROPOSE);
+        ACLMessage msg = new ACLMessage(ACLMessage.CFP);
         msg.setContent(String.valueOf(data.getLoad()/2));
         msg.setProtocol("Task");
         msg.addReceiver(data.getTopic());

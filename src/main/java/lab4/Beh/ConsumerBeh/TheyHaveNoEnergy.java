@@ -11,7 +11,7 @@ public class TheyHaveNoEnergy extends Behaviour {
     @Override
     public void action() {
         MessageTemplate reply = MessageTemplate.and(
-                MessageTemplate.MatchPerformative(ACLMessage.INFORM),
+                MessageTemplate.MatchPerformative(ACLMessage.REJECT_PROPOSAL),
                 MessageTemplate.MatchProtocol("DontHaveEnergy"));
         ACLMessage myReply = getAgent().receive( reply );
         if (myReply != null) {

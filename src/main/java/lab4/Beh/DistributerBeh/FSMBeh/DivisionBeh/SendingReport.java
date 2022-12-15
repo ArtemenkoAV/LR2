@@ -19,7 +19,7 @@ public class SendingReport extends OneShotBehaviour {
     @Override
     public void action() {
         DistributerCfg cfg = XMLHelper.unMarshalAny(DistributerCfg.class, getAgent().getLocalName() + ".xml");
-        ACLMessage minPrice = new ACLMessage(ACLMessage.INFORM);
+        ACLMessage minPrice = new ACLMessage(ACLMessage.ACCEPT_PROPOSAL);
         minPrice.addReceiver(new AID(cfg.getProducersName(), false));
         minPrice.setProtocol("IBoughtEnergyAfterDivision");
         minPrice.setContent(String.valueOf(data.getBestsPrices()));

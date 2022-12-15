@@ -22,7 +22,7 @@ public class DistributerFSM extends FSMBehaviour {
         super(a);
         this.data = data;
         registerFirstState(new SendTopicNameForProducer(getAgent(), data), "firstState");
-        registerState(new SendTaskForTopic(getAgent(), 1000,data), "secondState");
+        registerState(new SendTaskForTopic(getAgent(), 5000,data), "secondState");
 //        registerLastState(new ReceivingPricesFromProducer(getAgent(), pricesForDistributerData), "RECEIVINGPRICES");
         registerState(new DistributerParallelBeh(getAgent(), pricesForDistributerData, 5000), "RECEIVINGPRICES");
         registerState(new ChoosingBestPrice(getAgent(), data, pricesForDistributerData, bestPrice), "CHOOSINGBEST");
@@ -31,7 +31,7 @@ public class DistributerFSM extends FSMBehaviour {
         registerState(new DistributerParallelBehAfterDivision(getAgent(), pricesForDistributerData, 5000), "RECEIVINGPRICESAFTERDIVIS");
         registerState(new ChoosingBestPricesAfterDivision(getAgent(), data, pricesForDistributerData), "PRICESAFTERDIVISION");
         registerLastState(new TheyDontHaveEnergy(), "THEYDONTHAVEENERGY");
-        registerLastState(new MinPriceTooLargeAfterDivision(), "MIN");
+        registerLastState(new MinPriceTooLargeAfterDivision(getAgent(), pricesForDistributerData), "MIN");
         registerState(new WaitingForConfirmAfterDivisionParall(getAgent(), 10000, data), "ConfirmAfterDivision");
         registerLastState(new SendingReport(getAgent(), data), "REPORTBOUGHT");
         registerLastState(new DontHaveEnergy(), "NOENERGY");
@@ -45,7 +45,8 @@ public class DistributerFSM extends FSMBehaviour {
         registerDefaultTransition("DIVISIONCONTRACT", "RECEIVINGPRICESAFTERDIVIS");
         registerTransition("RECEIVINGPRICESAFTERDIVIS", "PRICESAFTERDIVISION", 1);
         registerTransition("RECEIVINGPRICESAFTERDIVIS","THEYDONTHAVEENERGY", 2);
-        registerDefaultTransition("PRICESAFTERDIVISION","ConfirmAfterDivision");
+        registerTransition("PRICESAFTERDIVISION","ConfirmAfterDivision", 1);
+        registerTransition("PRICESAFTERDIVISION","MIN", 2);
         registerTransition("ConfirmAfterDivision","REPORTBOUGHT", 1 );
         registerTransition("ConfirmAfterDivision","NOENERGY", 2 );
 //        registerDefaultTransition("MIN","THEEND2");

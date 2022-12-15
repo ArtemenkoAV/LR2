@@ -47,7 +47,7 @@ public class ChoosingBestPricesAfterDivision extends OneShotBehaviour {
             } allMinPricesAfterDivision.add(minprice);
             if (minprice <= data.getMaxPrice()) {
                 onEnd = 1;
-                ACLMessage win = new ACLMessage(ACLMessage.INFORM);
+                ACLMessage win = new ACLMessage(ACLMessage.PROPOSE);
                 win.addReceiver(new AID("TPP", false));
                 win.setProtocol("WinnerAfterDiv");
                 win.setContent("TPP " + minprice);
@@ -63,7 +63,7 @@ public class ChoosingBestPricesAfterDivision extends OneShotBehaviour {
             } allMinPricesAfterDivision.add(minprice);
             if (minprice <= data.getMaxPrice()) {
                 onEnd = 1;
-                ACLMessage win = new ACLMessage(ACLMessage.INFORM);
+                ACLMessage win = new ACLMessage(ACLMessage.PROPOSE);
                 win.addReceiver(new AID("TPP2", false));
                 win.setProtocol("WinnerAfterDiv");
                 win.setContent("TPP2 " + minprice);

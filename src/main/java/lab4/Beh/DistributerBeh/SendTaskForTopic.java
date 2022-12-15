@@ -14,11 +14,10 @@ public class SendTaskForTopic extends WakerBehaviour {
 
     @Override
     protected void onWake() {
-        ACLMessage msg = new ACLMessage(ACLMessage.PROPOSE);
+        ACLMessage msg = new ACLMessage(ACLMessage.CFP);
         msg.setContent(String.valueOf(data.getLoad()));
         msg.setProtocol("Task");
         msg.addReceiver(data.getTopic());
-        System.out.println("Task load "+data.getTopic());
         getAgent().send(msg);
     }
 }

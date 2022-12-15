@@ -29,8 +29,8 @@ public class ReceivingAnswerForConsumerPar extends ParallelBehaviour {
         this.consumerData = consumerData;
         this.onEnd=onEnd;
 
-        receiveEnergyAfterDivision =new ReceivingBoughtEnergyAfterDivision();
-        receiveEnergy = new ReceivingBoughtEnergy();
+        receiveEnergyAfterDivision =new ReceivingBoughtEnergyAfterDivision(consumerData);
+        receiveEnergy = new ReceivingBoughtEnergy(consumerData);
         priceTooLow = new MyPriceIsTooLow(getAgent(),consumerData);
         haveNoEnergy = new TheyHaveNoEnergy();
 

@@ -6,6 +6,7 @@ import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
 import lab4.Beh.ProducerBeh.ReceiveTask;
+import lab4.Beh.ProducerBeh.TPPParcer;
 import lab4.Config.TPPCfg;
 import lab4.Datas.ProducerData;
 import lab4.XMLHelper;
@@ -15,15 +16,21 @@ public class ProducerAgent extends Agent {
     @Override
     protected void setup() {
         registration();
-        String cfgName = null;
-        switch (getLocalName()){
-            case "TPP":
-            case "TPP2":
-                TPPCfg tppCfg = XMLHelper.unMarshalAny(TPPCfg.class, getLocalName() + ".xml");
-                producerData.getProducerLoad().put(getAID(),tppCfg.getA());
-//                System.out.println(getLocalName()+" storage is "+producerData.getProducerLoad().get(getAID()));
-
-                break;
+//        String cfgName = null;
+//        switch (getLocalName()){
+//            case "TPP":
+//            case "TPP2":
+//                TPPCfg tppCfg = XMLHelper.unMarshalAny(TPPCfg.class, getLocalName() + ".xml");
+//                producerData.getProducerLoad().put(getAID(),tppCfg.getA());
+////                System.out.println(getLocalName()+" storage is "+producerData.getProducerLoad().get(getAID()));
+//
+//                break;
+//        }
+        if(this.getLocalName().equals("TPP") ){
+            addBehaviour(new TPPParcer(this, 50000, producerData));
+        }
+        if(this.getLocalName().equals("TPP2") ){
+            addBehaviour(new TPPParcer(this, 50000, producerData));
         }
         addBehaviour(new ReceiveTask(producerData));
 

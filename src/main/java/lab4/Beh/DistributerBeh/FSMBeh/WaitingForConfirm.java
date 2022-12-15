@@ -38,11 +38,12 @@ public class WaitingForConfirm extends Behaviour {
         ACLMessage congratulations = getAgent().receive( informConfirm );
         if ( congratulations != null) {
             DistributerCfg cfg = XMLHelper.unMarshalAny(DistributerCfg.class, getAgent().getLocalName()+".xml");
-            ACLMessage minPrice = new ACLMessage(ACLMessage.INFORM);
+            ACLMessage minPrice = new ACLMessage(ACLMessage.ACCEPT_PROPOSAL);
             minPrice.addReceiver(new AID(cfg.getProducersName(), false));
             minPrice.setProtocol("IBoughtEnergy");
-            minPrice.setContent(String.valueOf(bestPrice));
+            minPrice.setContent(bestPrice.getName()+"price = " + bestPrice.getPrice());
             getAgent().send(minPrice);
+            confirm = 1;
 //            getAgent().addBehaviour(new DistributerFSM(getAgent(), data));
 //            confirm = true;
         } else {

@@ -19,7 +19,7 @@ public class MinPriceTooLarge extends OneShotBehaviour {
     @Override
     public void action() {
         DistributerCfg cfg = XMLHelper.unMarshalAny(DistributerCfg.class, getAgent().getLocalName()+".xml");
-        ACLMessage minPrice = new ACLMessage(ACLMessage.INFORM);
+        ACLMessage minPrice = new ACLMessage(ACLMessage.REJECT_PROPOSAL);
         minPrice.setContent(String.valueOf(bestPrice.getPrice()));
         minPrice.addReceiver(new AID(cfg.getProducersName(), false));
         minPrice.setProtocol("MaxPriceTooLow");

@@ -30,6 +30,7 @@ public class SendingTaskToAuction extends WakerBehaviour {
         System.out.println(getAgent().getLocalName()+": My current load is "+load.get(TimeHelper.getActualHour())
                 +" it's "+TimeHelper.getActualHour()+":00 O'Clock");
         ACLMessage task = new ACLMessage(ACLMessage.REQUEST);
+        data.setLoad(load.get(TimeHelper.getActualHour()));
         task.setContent(load.get(TimeHelper.getActualHour()) + ","+ data.getMaxPrice());
 
         task.setProtocol("Task");

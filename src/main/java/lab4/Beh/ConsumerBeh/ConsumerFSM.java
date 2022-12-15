@@ -13,7 +13,7 @@ public class ConsumerFSM extends FSMBehaviour {
     public ConsumerFSM(Agent a, ConsumerData consumerData) {
         super(a);
         this.consumerData = consumerData;
-        registerFirstState(new SendingTaskToAuction(getAgent(), 20000, consumerData), "SENDREQ");
+        registerFirstState(new SendingTaskToAuction(getAgent(), TimeHelper.getDelay()+500, consumerData), "SENDREQ");
         registerState(new ReceivingAnswerForConsumerPar(getAgent(), consumerData, onEnd), "RECEIVINGANSWER");
         registerLastState(new StarterConsumerFSM(getAgent(), consumerData), "ONCEAGAIN");
         registerDefaultTransition("SENDREQ","RECEIVINGANSWER");

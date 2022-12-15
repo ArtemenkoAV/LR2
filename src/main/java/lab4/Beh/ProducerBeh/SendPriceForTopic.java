@@ -22,7 +22,7 @@ public class SendPriceForTopic extends Behaviour {
     @Override
     public void action() {
         MessageTemplate mtt = MessageTemplate.and(
-                MessageTemplate.MatchPerformative(ACLMessage.PROPOSE),
+                MessageTemplate.MatchPerformative(ACLMessage.CFP),
                 MessageTemplate.MatchProtocol("Task"));
         topic = TopicHelper.createTopic(getAgent(), topicName);
         ACLMessage receive = getAgent().receive(mtt);

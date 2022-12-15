@@ -29,7 +29,7 @@ public class WaitingForWin extends Behaviour {
     @Override
     public void action() {
         MessageTemplate msg = MessageTemplate.and(
-                MessageTemplate.MatchPerformative(ACLMessage.INFORM),
+                MessageTemplate.MatchPerformative(ACLMessage.PROPOSE),
                 MessageTemplate.MatchProtocol("Winner"));
         ACLMessage winner = getAgent().receive(msg);
         if (winner != null) {

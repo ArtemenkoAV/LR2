@@ -18,12 +18,12 @@ public class MyPriceIsTooLow extends Behaviour {
     @Override
     public void action() {
         MessageTemplate reply = MessageTemplate.and(
-                MessageTemplate.MatchPerformative(ACLMessage.INFORM),
+                MessageTemplate.MatchPerformative(ACLMessage.REJECT_PROPOSAL),
                 MessageTemplate.MatchProtocol("MaxPriceTooLow"));
         ACLMessage myReply = getAgent().receive( reply );
         if (myReply != null) {
             double lowestPriceInTrade = Double.parseDouble(myReply.getContent());
-            consumerData.setMaxPrice(lowestPriceInTrade);
+            consumerData.setMaxPrice(lowestPriceInTrade+0.01);
             System.out.println(getAgent().getLocalName()+": my last price was too low, my new price is "+lowestPriceInTrade);
             onEnd = 2;
         }

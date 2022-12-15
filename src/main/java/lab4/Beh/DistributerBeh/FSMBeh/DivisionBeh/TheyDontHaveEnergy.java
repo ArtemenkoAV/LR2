@@ -10,7 +10,7 @@ public class TheyDontHaveEnergy extends OneShotBehaviour {
     @Override
     public void action() {
         DistributerCfg cfg = XMLHelper.unMarshalAny(DistributerCfg.class, getAgent().getLocalName()+".xml");
-        ACLMessage minPrice = new ACLMessage(ACLMessage.INFORM);
+        ACLMessage minPrice = new ACLMessage(ACLMessage.REJECT_PROPOSAL);
         minPrice.addReceiver(new AID(cfg.getProducersName(), false));
         minPrice.setProtocol("TheyDontHaveEnergy");
         getAgent().send(minPrice);

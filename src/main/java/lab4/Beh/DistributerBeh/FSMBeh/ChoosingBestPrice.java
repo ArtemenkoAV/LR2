@@ -27,13 +27,13 @@ public class ChoosingBestPrice extends OneShotBehaviour {
         bestPrice.setPrice(priceForDistributerData.getPricesWithNames().get(priceForDistributerData.getPricesWithNames().size()-1).getPrice());
         bestPrice.setName(priceForDistributerData.getPricesWithNames().get(priceForDistributerData.getPricesWithNames().size()-1).getName());
         if(bestPrice.getPrice()<data.getMaxPrice()){
-            ACLMessage win = new ACLMessage(ACLMessage.INFORM);
+            ACLMessage win = new ACLMessage(ACLMessage.PROPOSE);
             win.addReceiver(new AID(bestPrice.getName(), false));
             win.setProtocol("Winner");
             getAgent().send(win);}
         else{
             DistributerCfg cfg = XMLHelper.unMarshalAny(DistributerCfg.class, getAgent().getLocalName()+".xml");
-            ACLMessage minPrice = new ACLMessage(ACLMessage.INFORM);
+            ACLMessage minPrice = new ACLMessage(ACLMessage.REJECT_PROPOSAL);
             minPrice.setContent(String.valueOf(bestPrice.getPrice()));
             minPrice.addReceiver(new AID(cfg.getProducersName(), false));
             minPrice.setProtocol("MaxPriceTooLow");

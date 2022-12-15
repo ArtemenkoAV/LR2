@@ -27,7 +27,7 @@ public class WaitingForWinAfterDiv extends Behaviour {
     @Override
     public void action() {
         MessageTemplate msg = MessageTemplate.and(
-                MessageTemplate.MatchPerformative(ACLMessage.INFORM),
+                MessageTemplate.MatchPerformative(ACLMessage.PROPOSE),
                 MessageTemplate.MatchProtocol("WinnerAfterDiv"));
         ACLMessage winner = getAgent().receive(msg);
         if (winner != null) {
