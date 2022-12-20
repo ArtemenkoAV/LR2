@@ -35,22 +35,15 @@ public class WaitingForWin extends Behaviour {
         if (winner != null) {
             producerData.setWinMsg(winner.getContent());
             if (producerData.getProducerLoad().get(getAgent().getAID()) >= neededLoad) {
-                producerData.getProducerLoad().put(getAgent().getAID(), producerData.getProducerLoad().get(getAgent().getAID()) - neededLoad);
+                producerData.getProducerLoad().put(getAgent().getAID(), producerData.getProducerLoad().
+                        get(getAgent().getAID()) - neededLoad);
                 ACLMessage confirm = winner.createReply();
-//                ACLMessage confirm = new ACLMessage(ACLMessage.ACCEPT_PROPOSAL);
-//                confirm.addReceiver(new AID(distributersName, false));
+
                 confirm.setPerformative(ACLMessage.ACCEPT_PROPOSAL);
                 confirm.setProtocol("ConfirmSelling");
                 confirm.setContent(String.valueOf(producerData.getWinMsg()));
                 getAgent().send(confirm);
                 iWon=true;
-//            if (winner.getSender().getLocalName().equals(distributersName)) {
-//
-//                onEnd.setOnEnd(1);
-
-//            } else {
-//                block();
-//            }
             }
 
         }

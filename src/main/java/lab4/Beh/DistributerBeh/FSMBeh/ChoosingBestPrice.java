@@ -15,7 +15,8 @@ public class ChoosingBestPrice extends OneShotBehaviour {
     PriceForDistributerData priceForDistributerData;
     PriceWithNameForDistributerData bestPrice;
 
-    public ChoosingBestPrice(Agent a, DistributerData data, PriceForDistributerData priceForDistributerData, PriceWithNameForDistributerData bestPrice) {
+    public ChoosingBestPrice(Agent a, DistributerData data, PriceForDistributerData priceForDistributerData,
+                             PriceWithNameForDistributerData bestPrice) {
         super(a);
         this.data = data;
         this.priceForDistributerData = priceForDistributerData;
@@ -24,15 +25,18 @@ public class ChoosingBestPrice extends OneShotBehaviour {
 
     @Override
     public void action() {
-        bestPrice.setPrice(priceForDistributerData.getPricesWithNames().get(priceForDistributerData.getPricesWithNames().size()-1).getPrice());
-        bestPrice.setName(priceForDistributerData.getPricesWithNames().get(priceForDistributerData.getPricesWithNames().size()-1).getName());
+        bestPrice.setPrice(priceForDistributerData.getPricesWithNames().get(priceForDistributerData.getPricesWithNames()
+                .size()-1).getPrice());
+        bestPrice.setName(priceForDistributerData.getPricesWithNames().get(priceForDistributerData.getPricesWithNames()
+                .size()-1).getName());
         if(bestPrice.getPrice()<data.getMaxPrice()){
             ACLMessage win = new ACLMessage(ACLMessage.PROPOSE);
             win.addReceiver(new AID(bestPrice.getName(), false));
             win.setProtocol("Winner");
             getAgent().send(win);}
         else{
-            DistributerCfg cfg = XMLHelper.unMarshalAny(DistributerCfg.class, getAgent().getLocalName()+".xml");
+            DistributerCfg cfg = XMLHelper.unMarshalAny(DistributerCfg.class, getAgent().getLocalName()
+                    +".xml");
             ACLMessage minPrice = new ACLMessage(ACLMessage.REJECT_PROPOSAL);
             minPrice.setContent(String.valueOf(bestPrice.getPrice()));
             minPrice.addReceiver(new AID(cfg.getProducersName(), false));
@@ -40,12 +44,7 @@ public class ChoosingBestPrice extends OneShotBehaviour {
             getAgent().send(minPrice);
         }
 
-//            for(int i =0 ; i<priceForDistributerData.getPricesWithNames().size(); i++)
-//                if(priceForDistributerData.getPricesWithNames().get(i).getName().equals(bestPrice.getName())){
-//                    ACLMessage win = new ACLMessage(ACLMessage.PROPOSE);
-//                    win.addReceiver(new AID(bestPrice.getName(), false));
-//                    win.setProtocol("Winner");
-//                    getAgent().send(win);}
+
 
 
     }

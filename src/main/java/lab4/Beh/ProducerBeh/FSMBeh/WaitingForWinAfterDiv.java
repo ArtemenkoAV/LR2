@@ -32,16 +32,12 @@ public class WaitingForWinAfterDiv extends Behaviour {
         ACLMessage winner = getAgent().receive(msg);
         if (winner != null) {
             if (winner.getSender().getLocalName().equals(distributersName)) {
+
                 producerData.setWinMsg(winner.getContent());
                 iWon= true;
-
-            }
-//            else {
-//                block();
-//            }
             }
 
-
+        }
         else {
             block();
         }
@@ -49,8 +45,6 @@ public class WaitingForWinAfterDiv extends Behaviour {
 
     @Override
     public boolean done() {
-
-
         return iWon;
     }
 }

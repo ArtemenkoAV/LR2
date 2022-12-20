@@ -3,6 +3,7 @@ package lab4.Beh.DistributerBeh.FSMBeh.DivisionBeh;
 import jade.core.Agent;
 import jade.core.behaviours.ParallelBehaviour;
 import jade.core.behaviours.WakerBehaviour;
+import lab4.Beh.DistributerBeh.FSMBeh.ReceivingDidntEnergyProducer;
 import lab4.Datas.DistributerData;
 import lab4.Datas.OnEnd;
 import lab4.Datas.PriceWithNameForDistributerData;

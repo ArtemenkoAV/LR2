@@ -24,8 +24,8 @@ public class SendingTaskToAuction extends WakerBehaviour {
 
     @Override
     protected void onWake() {
-        ConsumerCfg consumerCfg = XMLHelper.unMarshalAny(ConsumerCfg.class, getAgent().getLocalName() + ".xml");
-
+        ConsumerCfg consumerCfg = XMLHelper.unMarshalAny(ConsumerCfg.class, getAgent().getLocalName()
+                + ".xml");
         List<Double> load = consumerCfg.getLoad();
         System.out.println(getAgent().getLocalName()+": My current load is "+load.get(TimeHelper.getActualHour())
                 +" it's "+TimeHelper.getActualHour()+":00 O'Clock");

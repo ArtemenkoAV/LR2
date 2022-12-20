@@ -11,7 +11,8 @@ public class DistributerParallelBehAfterDivision extends ParallelBehaviour {
     PriceForDistributerData pricesForDistributerData;
     private OnEnd onEnd = new OnEnd();
 
-    public DistributerParallelBehAfterDivision(Agent a, PriceForDistributerData pricesForDistributerData,  long wakeUpTime) {
+    public DistributerParallelBehAfterDivision(Agent a, PriceForDistributerData pricesForDistributerData,
+                                               long wakeUpTime) {
         super(a, WHEN_ANY);
         this.pricesForDistributerData = pricesForDistributerData;
         addSubBehaviour(new ReceivingPricesFromProducer(getAgent(), pricesForDistributerData, onEnd));

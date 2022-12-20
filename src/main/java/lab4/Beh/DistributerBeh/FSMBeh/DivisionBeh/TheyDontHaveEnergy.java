@@ -12,9 +12,10 @@ public class TheyDontHaveEnergy extends OneShotBehaviour {
         DistributerCfg cfg = XMLHelper.unMarshalAny(DistributerCfg.class, getAgent().getLocalName()+".xml");
         ACLMessage minPrice = new ACLMessage(ACLMessage.REJECT_PROPOSAL);
         minPrice.addReceiver(new AID(cfg.getProducersName(), false));
-        minPrice.setProtocol("TheyDontHaveEnergy");
+        minPrice.setProtocol("noEnergy");
         getAgent().send(minPrice);
-        System.out.println(getAgent().getLocalName()+" didn't buy any energy for "+cfg.getProducersName()+" because seller don't have enough energy");
+        System.out.println(getAgent().getLocalName()+" didn't buy any energy for "+cfg.getProducersName()+
+                " because seller don't have enough energy");
 
     }
 }

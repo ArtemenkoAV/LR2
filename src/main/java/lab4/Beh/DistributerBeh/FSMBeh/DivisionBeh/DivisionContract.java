@@ -9,12 +9,11 @@ import lab4.Datas.PriceForDistributerData;
 
 public class DivisionContract extends OneShotBehaviour {
     DistributerData data;
-    PriceForDistributerData pricesForDistributerData;
 
-    public DivisionContract(Agent a, DistributerData data, PriceForDistributerData pricesForDistributerData) {
+    public DivisionContract(Agent a, DistributerData data) {
         super(a);
         this.data = data;
-        this.pricesForDistributerData = pricesForDistributerData;
+
     }
 
     @Override

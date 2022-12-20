@@ -3,7 +3,7 @@ package lab4;
 public class TimeHelper {
 
     private static long startTime = System.currentTimeMillis();
-    private static int hourDuration = 60_000;
+    public static int hourDuration = 75000;
 
     public static int getActualHour(){
         return (int) (System.currentTimeMillis() - startTime) / hourDuration % 24;

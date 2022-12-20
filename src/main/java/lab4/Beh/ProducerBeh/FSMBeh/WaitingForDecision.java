@@ -15,7 +15,8 @@ public class WaitingForDecision extends ParallelBehaviour {
     ProducerData producerData;
 
     private OnEnd onEnd = new OnEnd();
-    public WaitingForDecision(Agent a,long wakeUpTime, String distributersName, ProducerData producerData, double neededLoad) {
+    public WaitingForDecision(Agent a,long wakeUpTime, String distributersName, ProducerData producerData,
+                              double neededLoad) {
         super(a, WHEN_ANY);
         this.distributersName = distributersName;
         this.producerData = producerData;

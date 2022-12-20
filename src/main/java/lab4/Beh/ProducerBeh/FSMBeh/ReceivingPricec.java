@@ -19,8 +19,9 @@ public class ReceivingPricec extends ParallelBehaviour {
         this.distributersName = distributersName;
         this.topic = topic;
 
-        addSubBehaviour(new ReceivingPricesFromOtherProducers(getAgent(), neededLoad, producerData, distributersName, topic));
-        addSubBehaviour(new WakerBehaviour(getAgent(), 5000) {
+        addSubBehaviour(new ReceivingPricesFromOtherProducers(getAgent(), neededLoad, producerData, distributersName,
+                topic));
+        addSubBehaviour(new WakerBehaviour(getAgent(), 4000) {
             @Override
             protected void onWake() {
                 super.onWake();

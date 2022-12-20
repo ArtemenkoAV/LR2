@@ -14,7 +14,7 @@ public class CreateConsumerData extends OneShotBehaviour {
 
     @Override
     public void action() {
-        consumerData.setMaxPrice(100);
+        consumerData.setMaxPrice(300);
 
 
     }

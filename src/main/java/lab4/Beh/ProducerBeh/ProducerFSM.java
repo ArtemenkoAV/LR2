@@ -18,21 +18,23 @@ public class ProducerFSM extends FSMBehaviour {
         this.producerData = producerData;
         this.topic=topic;
 
-        registerFirstState(new SendingPrice(getAgent(), distributersName, neededLoad, producerData, topic), "SENDINGPRICE");
-        registerState(new ReceivingPricec(getAgent(), neededLoad, producerData, distributersName, topic), "RECEIVINGPRICE");
-        registerState(new WaitingForDecision(getAgent(),5000, distributersName, producerData, neededLoad), "WAITINGFORDECISION");
-        registerLastState(new AfterWin(getAgent(), distributersName, neededLoad, producerData), "AFTERWIN");
-        registerLastState(new DontHaveEnergy(),"NOENERGY");
-        registerLastState(new DidntSellEnergy(), "AFTERLOST");
-        registerLastState(new BoughtEnergy(), "BOUGHT");
+        registerFirstState(new SendingPrice(getAgent(), distributersName, neededLoad, producerData, topic),
+                "SendPrice");
+        registerState(new ReceivingPricec(getAgent(), neededLoad, producerData, distributersName, topic),
+                "ReceivePrice");
+        registerState(new WaitingForDecision(getAgent(),10000, distributersName, producerData, neededLoad),
+                "WaitForDecision");
+        registerLastState(new AfterWin(getAgent(), distributersName, neededLoad, producerData), "Winner");
+
+        registerLastState(new DidntSellEnergy(), "noEnergy");
+        registerLastState(new BoughtEnergy(), "BoughtEnergy");
 
 
-        registerTransition("SENDINGPRICE", "RECEIVINGPRICE", 1);
-        registerTransition("SENDINGPRICE", "NOENERGY", 2);
-        registerDefaultTransition("RECEIVINGPRICE", "WAITINGFORDECISION");
-        registerTransition("WAITINGFORDECISION", "AFTERWIN", 1);
-        registerTransition("WAITINGFORDECISION", "AFTERLOST",2);
-        registerTransition("WAITINGFORDECISION", "BOUGHT",3);
+        registerDefaultTransition("SendPrice", "ReceivePrice");
+        registerDefaultTransition("ReceivePrice", "WaitForDecision");
+        registerTransition("WaitForDecision", "Winner", 1);
+        registerTransition("WaitForDecision", "noEnergy",2);
+        registerTransition("WaitForDecision", "BoughtEnergy",3);
     }
 
 

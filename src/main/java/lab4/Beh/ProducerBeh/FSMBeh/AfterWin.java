@@ -22,7 +22,8 @@ public class AfterWin extends OneShotBehaviour {
     public void action() {
 
         if (producerData.getProducerLoad().get(getAgent().getAID()) >= neededLoad){
-            producerData.getProducerLoad().put(getAgent().getAID(), producerData.getProducerLoad().get(getAgent().getAID()) - neededLoad);
+            producerData.getProducerLoad().put(getAgent().getAID(), producerData.getProducerLoad()
+                    .get(getAgent().getAID()) - neededLoad);
             ACLMessage confirm = new ACLMessage(ACLMessage.ACCEPT_PROPOSAL);
             confirm.addReceiver(new AID(distributersName, false));
             confirm.setProtocol("ConfirmSelling");

@@ -28,7 +28,8 @@ public class SendPriceForTopic extends Behaviour {
         ACLMessage receive = getAgent().receive(mtt);
         if(receive !=null) {
             double neededLoad = Double.parseDouble(receive.getContent());
-            getAgent().addBehaviour(new ProducerFSM(getAgent(), receive.getSender().getLocalName(), neededLoad, producerData, topic));
+            getAgent().addBehaviour(new ProducerFSM(getAgent(), receive.getSender().getLocalName(), neededLoad,
+                    producerData, topic));
             System.out.println(getAgent().getLocalName() + ": " + receive.getContent());
         }
         else {

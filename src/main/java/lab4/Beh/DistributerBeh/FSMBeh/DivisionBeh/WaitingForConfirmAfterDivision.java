@@ -44,6 +44,9 @@ public class WaitingForConfirmAfterDivision extends Behaviour {
 //            minPrice.setContent(congratulations.getContent());
 //            getAgent().send(minPrice);
         }
+        else {
+            block();
+        }
     }
 
     @Override

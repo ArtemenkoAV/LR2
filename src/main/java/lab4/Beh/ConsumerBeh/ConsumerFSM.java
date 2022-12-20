@@ -8,16 +8,19 @@ import lab4.TimeHelper;
 
 public class ConsumerFSM extends FSMBehaviour {
     ConsumerData consumerData;
-    OnEnd onEnd = new OnEnd();
+    OnEnd onEnded = new OnEnd();
 
     public ConsumerFSM(Agent a, ConsumerData consumerData) {
         super(a);
         this.consumerData = consumerData;
-        registerFirstState(new SendingTaskToAuction(getAgent(), TimeHelper.getDelay()+500, consumerData), "SENDREQ");
-        registerState(new ReceivingAnswerForConsumerPar(getAgent(), consumerData, onEnd), "RECEIVINGANSWER");
-        registerLastState(new StarterConsumerFSM(getAgent(), consumerData), "ONCEAGAIN");
-        registerDefaultTransition("SENDREQ","RECEIVINGANSWER");
-        registerDefaultTransition("RECEIVINGANSWER", "ONCEAGAIN");
+        registerFirstState(new SendingTaskToAuction(getAgent(), TimeHelper.getDelay()+2000, consumerData),
+                "SendReq");
+        registerState(new ReceivingAnswerForConsumerPar(getAgent(), consumerData, onEnded), "ReceiveAnswer");
+
+        registerLastState(new StarterConsumerFSM(getAgent(), consumerData), "Restart");
+        registerDefaultTransition("SendReq","ReceiveAnswer");
+        registerDefaultTransition("ReceiveAnswer", "Restart");
+
     }
 
 }

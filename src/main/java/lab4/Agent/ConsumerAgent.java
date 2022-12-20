@@ -14,8 +14,6 @@ public class ConsumerAgent extends Agent {
 
     @Override
     protected void setup() {
-//        addBehaviour(new SendingTaskToAuction(this, TimeHelper.getDelay()+500, 100, consumerData));
-//        addBehaviour(new ReceivingBoughtEnergy());
         addBehaviour(new CreateConsumerData(this, consumerData));
         addBehaviour(new ConsumerFSM(this, consumerData));
     }

@@ -1,14 +1,13 @@
 package TestAgent;
 
 import org.junit.Assert;
-import org.junit.jupiter.api.Test;
 import pr.beh.ConsumerFSM;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Script2  extends TestUtil {
-    @Test
+public class Script2  extends Test {
+    @org.junit.jupiter.api.Test
     public void script_difPrice(){
         List<String> services = new ArrayList<>();
         services.add("jade.core.messaging.TopicManagementService");

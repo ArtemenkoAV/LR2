@@ -3,16 +3,11 @@ package lab4.Beh.DistributerBeh;
 
 import jade.core.Agent;
 import jade.core.behaviours.FSMBehaviour;
-import lab4.Beh.DistributerBeh.FSMBeh.ChoosingBestPrice;
-import lab4.Beh.DistributerBeh.FSMBeh.DistributerParallelBeh;
+import lab4.Beh.DistributerBeh.FSMBeh.*;
 import lab4.Beh.DistributerBeh.FSMBeh.DivisionBeh.*;
-import lab4.Beh.DistributerBeh.FSMBeh.ReceivingPricesFromProducer;
-import lab4.Beh.DistributerBeh.FSMBeh.WaitingForConfirm;
 import lab4.Datas.DistributerData;
 import lab4.Datas.PriceForDistributerData;
 import lab4.Datas.PriceWithNameForDistributerData;
-import pr.beh.SendQuantity;
-import pr.beh.SendTopicName;
 
 public class DistributerFSM extends FSMBehaviour {
     PriceForDistributerData pricesForDistributerData = new PriceForDistributerData();
@@ -21,35 +16,41 @@ public class DistributerFSM extends FSMBehaviour {
     public DistributerFSM(Agent a, DistributerData data) {
         super(a);
         this.data = data;
-        registerFirstState(new SendTopicNameForProducer(getAgent(), data), "firstState");
-        registerState(new SendTaskForTopic(getAgent(), 5000,data), "secondState");
-//        registerLastState(new ReceivingPricesFromProducer(getAgent(), pricesForDistributerData), "RECEIVINGPRICES");
-        registerState(new DistributerParallelBeh(getAgent(), pricesForDistributerData, 5000), "RECEIVINGPRICES");
-        registerState(new ChoosingBestPrice(getAgent(), data, pricesForDistributerData, bestPrice), "CHOOSINGBEST");
-        registerLastState(new WaitingForConfirm(getAgent(),bestPrice,data), "THEEND");
-        registerState(new DivisionContract(getAgent(), data, pricesForDistributerData), "DIVISIONCONTRACT");
-        registerState(new DistributerParallelBehAfterDivision(getAgent(), pricesForDistributerData, 5000), "RECEIVINGPRICESAFTERDIVIS");
-        registerState(new ChoosingBestPricesAfterDivision(getAgent(), data, pricesForDistributerData), "PRICESAFTERDIVISION");
-        registerLastState(new TheyDontHaveEnergy(), "THEYDONTHAVEENERGY");
-        registerLastState(new MinPriceTooLargeAfterDivision(getAgent(), pricesForDistributerData), "MIN");
-        registerState(new WaitingForConfirmAfterDivisionParall(getAgent(), 10000, data), "ConfirmAfterDivision");
-        registerLastState(new SendingReport(getAgent(), data), "REPORTBOUGHT");
-        registerLastState(new DontHaveEnergy(), "NOENERGY");
+        registerFirstState(new SendTopicNameForProducer(getAgent(), data), "SendTopic");
+        registerState(new SendTaskForTopic(getAgent(), 4000,data), "SendTask");
+        registerState(new DistributerParallelBeh(getAgent(), pricesForDistributerData, 5000),
+                "ReceivingPrices");
+        registerState(new ChoosingBestPrice(getAgent(), data, pricesForDistributerData, bestPrice),
+                "ChooseBestPrice");
+        registerState(new WaitingForConfirmParal(getAgent(),3000), "Wait");
+        registerLastState(new IBoughtEnergy(bestPrice), "BoughtEnergy");
+        registerLastState(new SellerAlreadySoldOneShotBeh(getAgent(),data),"Restart");
+        registerState(new DivisionContract(getAgent(), data), "DivisionContract");
+        registerState(new DistributerParallelBehAfterDivision(getAgent(), pricesForDistributerData, 5000),
+                "ReceivePriceAfterDiv");
+        registerState(new ChoosingBestPricesAfterDivision(getAgent(), data, pricesForDistributerData),
+                "ChooseBestPriceAfterDiv");
+        registerLastState(new TheyDontHaveEnergy(), "NoEnergy");
+        registerLastState(new MinPriceTooLargeAfterDivision(getAgent(), pricesForDistributerData), "NewMaxPrice");
+        registerState(new WaitingForConfirmAfterDivisionParall(getAgent(), 6000, data),
+                "ConfirmAfterDivision");
+        registerLastState(new SendingReport(getAgent(), data), "ReportBought");
 
 
-        registerDefaultTransition("firstState", "secondState");
-        registerDefaultTransition("secondState","RECEIVINGPRICES" );
-        registerTransition("RECEIVINGPRICES","CHOOSINGBEST", 1);
-        registerDefaultTransition("CHOOSINGBEST", "THEEND");
-        registerTransition("RECEIVINGPRICES","DIVISIONCONTRACT", 2);
-        registerDefaultTransition("DIVISIONCONTRACT", "RECEIVINGPRICESAFTERDIVIS");
-        registerTransition("RECEIVINGPRICESAFTERDIVIS", "PRICESAFTERDIVISION", 1);
-        registerTransition("RECEIVINGPRICESAFTERDIVIS","THEYDONTHAVEENERGY", 2);
-        registerTransition("PRICESAFTERDIVISION","ConfirmAfterDivision", 1);
-        registerTransition("PRICESAFTERDIVISION","MIN", 2);
-        registerTransition("ConfirmAfterDivision","REPORTBOUGHT", 1 );
-        registerTransition("ConfirmAfterDivision","NOENERGY", 2 );
-//        registerDefaultTransition("MIN","THEEND2");
+        registerDefaultTransition("SendTopic", "SendTask");
+        registerDefaultTransition("SendTask","ReceivingPrices");
+        registerTransition("ReceivingPrices","ChooseBestPrice", 1);
+        registerDefaultTransition("ChooseBestPrice", "Wait");
+        registerTransition("Wait", "BoughtEnergy", 1);
+        registerTransition("Wait", "Restart", 2);
+        registerTransition("ReceivingPrices","DivisionContract", 2);
+        registerDefaultTransition("DivisionContract", "ReceivePriceAfterDiv");
+        registerTransition("ReceivePriceAfterDiv", "ChooseBestPriceAfterDiv", 1);
+        registerTransition("ReceivePriceAfterDiv","NoEnergy", 2);
+        registerTransition("ChooseBestPriceAfterDiv","ConfirmAfterDivision", 1);
+        registerTransition("ChooseBestPriceAfterDiv","NewMaxPrice", 2);
+        registerTransition("ConfirmAfterDivision","ReportBought", 1 );
+        registerTransition("ConfirmAfterDivision","NoEnergy", 2 );
 
     }
 }

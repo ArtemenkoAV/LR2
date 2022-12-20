@@ -31,9 +31,6 @@ public class ReceivingPricesFromProducer extends Behaviour {
             prices.add(new PriceWithNameForDistributerData(hisPrice, priceFromProducer.getSender().getLocalName()));
             priceForDistributerData.setPricesWithNames(prices);
             onEnd.setOnEnd(1);
-//            System.out.println(getAgent().getLocalName()+" ended his trade, best price " + priceForDistributerData.getPricesWithNames().get(priceForDistributerData.getPricesWithNames().size()-1).getPrice());
-//            System.out.println("Name best Producer: " + priceForDistributerData.getPricesWithNames().get(priceForDistributerData.getPricesWithNames().size()-1).getName());
-
 
         }
         else {

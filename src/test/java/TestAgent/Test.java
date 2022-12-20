@@ -1,7 +1,5 @@
 package TestAgent;
 
-import TestAgent.TestConsumer;
-import TestAgent.TestProducer;
 import jade.core.behaviours.Behaviour;
 import jade.wrapper.AgentContainer;
 import jade.wrapper.AgentController;
@@ -10,7 +8,7 @@ import jade.core.ProfileImpl;
 import jade.core.Runtime;
 import java.util.List;
 
-public class TestUtil {
+public class Test {
     private AgentContainer mainContainer;
     public void startJade(List<String> services){
 

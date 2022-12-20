@@ -7,7 +7,6 @@ import lab4.Datas.ProducerData;
 
 public class ReceiveTask extends Behaviour {
     ProducerData producerData;
-
     public ReceiveTask(ProducerData producerData) {
         this.producerData = producerData;
     }
@@ -19,10 +18,9 @@ public class ReceiveTask extends Behaviour {
                 MessageTemplate.MatchProtocol("topicName"));
         ACLMessage receive = getAgent().receive(msg);
         if(receive!=null){
-            System.out.println(getAgent().getLocalName() + " " +
-                    receive.getContent());
             getAgent().addBehaviour(new SendPriceForTopic(receive.getContent(), producerData));
         }
+
         else {
             block();
         }

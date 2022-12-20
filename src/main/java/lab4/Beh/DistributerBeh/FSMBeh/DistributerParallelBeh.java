@@ -8,7 +8,7 @@ import lab4.Datas.PriceForDistributerData;
 
 public class DistributerParallelBeh extends ParallelBehaviour {
     PriceForDistributerData pricesForDistributerData;
-    private OnEnd onEnd = new OnEnd();
+    OnEnd onEnd = new OnEnd();
 
     public DistributerParallelBeh(Agent a, PriceForDistributerData pricesForDistributerData,  long wakeUpTime) {
         super(a, WHEN_ANY);

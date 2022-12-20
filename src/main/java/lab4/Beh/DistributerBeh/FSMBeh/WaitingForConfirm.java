@@ -13,22 +13,7 @@ import lab4.Datas.PriceWithNameForDistributerData;
 import lab4.XMLHelper;
 
 public class WaitingForConfirm extends Behaviour {
-    PriceWithNameForDistributerData bestPrice;
-    DistributerData data;
-
-    public WaitingForConfirm(Agent a, PriceWithNameForDistributerData bestPrice, DistributerData data) {
-        super(a);
-        this.bestPrice = bestPrice;
-        this.data = data;
-    }
-
-    private int confirm;
-
-    @Override
-    public int onEnd() {
-        confirm = 1;
-        return confirm;
-    }
+    private boolean confirm;
 
     @Override
     public void action() {
@@ -37,15 +22,7 @@ public class WaitingForConfirm extends Behaviour {
                 MessageTemplate.MatchProtocol("ConfirmSelling"));
         ACLMessage congratulations = getAgent().receive( informConfirm );
         if ( congratulations != null) {
-            DistributerCfg cfg = XMLHelper.unMarshalAny(DistributerCfg.class, getAgent().getLocalName()+".xml");
-            ACLMessage minPrice = new ACLMessage(ACLMessage.ACCEPT_PROPOSAL);
-            minPrice.addReceiver(new AID(cfg.getProducersName(), false));
-            minPrice.setProtocol("IBoughtEnergy");
-            minPrice.setContent(bestPrice.getName()+"price = " + bestPrice.getPrice());
-            getAgent().send(minPrice);
-            confirm = 1;
-//            getAgent().addBehaviour(new DistributerFSM(getAgent(), data));
-//            confirm = true;
+            confirm = true;
         } else {
             block();
         }
@@ -53,6 +30,7 @@ public class WaitingForConfirm extends Behaviour {
 
     @Override
     public boolean done() {
-        return confirm == 1;
+        return confirm;
     }
+
 }
