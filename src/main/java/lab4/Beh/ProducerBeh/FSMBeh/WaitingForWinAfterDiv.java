@@ -32,8 +32,8 @@ public class WaitingForWinAfterDiv extends Behaviour {
         ACLMessage winner = getAgent().receive(msg);
         if (winner != null) {
             if (winner.getSender().getLocalName().equals(distributersName)) {
-
                 producerData.setWinMsg(winner.getContent());
+
                 iWon= true;
             }
 

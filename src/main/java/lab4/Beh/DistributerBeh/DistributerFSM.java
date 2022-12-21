@@ -18,7 +18,7 @@ public class DistributerFSM extends FSMBehaviour {
         this.data = data;
         registerFirstState(new SendTopicNameForProducer(getAgent(), data), "SendTopic");
         registerState(new SendTaskForTopic(getAgent(), 4000,data), "SendTask");
-        registerState(new DistributerParallelBeh(getAgent(), pricesForDistributerData, 5000),
+        registerState(new DistributerParallelBeh(getAgent(), pricesForDistributerData, 7000),
                 "ReceivingPrices");
         registerState(new ChoosingBestPrice(getAgent(), data, pricesForDistributerData, bestPrice),
                 "ChooseBestPrice");

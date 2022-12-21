@@ -36,13 +36,13 @@ public class ChoosingBestPricesAfterDivision extends OneShotBehaviour {
             if (priceForDistributerData.getPricesWithNames().get(i).getName().equals("TPP")) {
                 firstProducerPrices.add(priceForDistributerData.getPricesWithNames().get(i).getPrice());
             }
-            if (priceForDistributerData.getPricesWithNames().get(i).getName().equals("TPP2")) {
+            if (priceForDistributerData.getPricesWithNames().get(i).getName().equals("WES")) {
                 secondProducerPrices.add(priceForDistributerData.getPricesWithNames().get(i).getPrice());
             }
             if (priceForDistributerData.getPricesWithNames().get(i).getName().equals("SES")) {
                 thirdProducerPrices.add(priceForDistributerData.getPricesWithNames().get(i).getPrice());
             }
-            if (priceForDistributerData.getPricesWithNames().get(i).getName().equals("WES")) {
+            if (priceForDistributerData.getPricesWithNames().get(i).getName().equals("TPP2")) {
                 forthProducerPrices.add(priceForDistributerData.getPricesWithNames().get(i).getPrice());
             }
         }
@@ -72,9 +72,9 @@ public class ChoosingBestPricesAfterDivision extends OneShotBehaviour {
             if (minprice <= data.getMaxPrice()) {
                 onEnd = 1;
                 ACLMessage win = new ACLMessage(ACLMessage.PROPOSE);
-                win.addReceiver(new AID("TPP2", false));
+                win.addReceiver(new AID("WES", false));
                 win.setProtocol("WinnerAfterDiv");
-                win.setContent("TPP2 " + minprice);
+                win.setContent("WES " + minprice);
                 getAgent().send(win);
             }
         }
@@ -104,9 +104,9 @@ public class ChoosingBestPricesAfterDivision extends OneShotBehaviour {
             if (minprice <= data.getMaxPrice()) {
                 onEnd = 1;
                 ACLMessage win = new ACLMessage(ACLMessage.PROPOSE);
-                win.addReceiver(new AID("WES", false));
+                win.addReceiver(new AID("TPP2", false));
                 win.setProtocol("WinnerAfterDiv");
-                win.setContent("WES " + minprice);
+                win.setContent("TPP2 " + minprice);
                 getAgent().send(win);
             }
         }

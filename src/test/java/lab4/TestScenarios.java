@@ -49,7 +49,7 @@ public class TestScenarios extends TestUtil{
         CreateAgent("Mpei", behaviourToTest);
         CreateAgent("TPP",new TPPFSMTest(producerData), new ReceiveTask(producerData));
         CreateAgent("SES",new SESFSMTest(producerData), new ReceiveTask(producerData));
-        CreateAgent("TPP2",new TPPFSMTest(producerData), new ReceiveTask(producerData));
+        CreateAgent("WES",new WESFSMTest(producerData), new ReceiveTask(producerData));
         CreateAgent("ThirdDistributer", new ReceiveTaskToAuction());
         sleep(35000);
 
